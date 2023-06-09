@@ -1,12 +1,13 @@
 import { Box, Divider, IconButton, Stack } from "@mui/material";
+import { useTheme } from "@emotion/react";
+import React from "react";
 import { Outlet } from "react-router-dom";
-import { useTheme } from "@mui/material/styles";
+
 import Logo from "../../assets/Images/logo.ico";
 import { Nav_Buttons } from "../../data";
 import { Gear } from "phosphor-react";
 
 const DashboardLayout = () => {
-  const [selected, setSelected] = Nav_Buttons.useState(0);
   const theme = useTheme();
   console.log(theme);
 
@@ -44,41 +45,11 @@ const DashboardLayout = () => {
           <Stack
             sx={{ width: "max-content", height: "max-content" }}
             direction={"column"}
-            alignItems={"center"}
             spacing={3}
           >
-            {Nav_Buttons.map((item) =>
-              item.index === selected ? (
-                <Box
-                  sx={{
-                    borderRadius: 1.5,
-                    backgroundColor: theme.palette.primary.main,
-                  }}
-                >
-                  <IconButton
-                    sx={{
-                      width: "max-content",
-                      color: "white",
-                    }}
-                    key={item.index}
-                  >
-                    {item.icon}
-                  </IconButton>
-                </Box>
-              ) : (
-                <IconButton
-                  onClick={() => setSelected(item.index)}
-                  sx={{
-                    width: "max-content",
-                    color: "black",
-                  }}
-                  key={item.index}
-                >
-                  {item.icon}
-                </IconButton>
-              )
-            )}
-
+            {Nav_Buttons.map((item) => (
+              <IconButton key={item.index}>{item.icon}</IconButton>
+            ))}
             {/* This is section divider */}
             <Divider />
             <IconButton>
